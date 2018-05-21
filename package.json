@@ -1,0 +1,21 @@
+{
+  "name": "rts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "express": "*",
+    "express-handlebars": "*",
+    "nodemon": "*",
+    "pg": "*",
+    "body-parser": "*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
