@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-xm-2 col-md-2 col-xl-2 pb-1 pl-1">
+    <!-- Button trigger new order modal -->
+    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#newOrderModal">הזמנה חדשה</button>
+  </div>
+  <div class="col-xm-2 col-md-2 col-xl-2 pb-1 pl-1">
+    <button class="btn btn-primary btn-block" type="submit">עדכון הזמנה</button>
+  </div>
+  <div class="col-xm-2 col-md-2 col-xl-2 pb-1 pl-1">
+    <div class="dropdown">
+      <button class="btn btn-success btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        סגנון תצוגה
+      </button>
+      <div class="dropdown-menu text-right" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">לקוחות</a>
+        <a class="dropdown-item" href="#">פריטים</a>
+        <a class="dropdown-item" href="#">הזמנות</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-xm-2 col-md-2 col-xl-2 pl-1 pb-1">
+    <!-- Search form -->
+    <div class="md-form">
+      <input class="form-control" type="text" placeholder="חיפוש" aria-label="Search">
+    </div>
+  </div>
+</div>
+<br>
+
+  <table class="table-responsive table">
+    <thead class="thead-light">
+      <tr>
+        <!-- <th>מספר לקוח</th> -->
+        <th>שם לקוח</th>
+        <th>פריטים בהזמנה</th>
+        <th>פריטים שסופקו</th>
+        <th>מספר הזמנה</th>
+        <th>תאריך קליטה</th>
+        <th>שם מען</th>
+        <th>עיר</th>
+        <th>רחוב</th>
+        <th>מספר רחוב</th>
+        <th>הערות</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#data}}
+        <tr>
+          <!-- <td>{{o_customer_id}}</td> -->
+          <td>{{customer_name}}</td>
+          <td>{{order_num}}</td>
+          <td>{{supplied}}</td>
+          <td>{{order_id}}</td>
+          <td>{{order_date}}</td>
+          <td>{{recipient_name}}</td>
+          <td>{{city}}</td>
+          <td>{{street}}</td>
+          <td>{{num_street}}</td>
+          <td>{{address_notes}}</td>
+      {{/data}}
+        </tr>
+    </tbody>
+  </table>
+
+<!-- Modal new order -->
+<div class="modal fade" id="newOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">יצירת הזמנה חדשה</h5>
+        <button type="button" class="close-left" data-dismiss="modal" aria-label="Close">
+          <spanaria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text"></input>
+        להכניס שדות ליצירת הזמנה
+      </div>
+      <div class="modal-footer">
+        <div class="col-md-2 col-md-3 col-xl-3">
+          <button type="button" class="btn btn-primary btn-block">שלח</button>
+        </div>
+        <div class="col-md-2 col-md-3 col-xl-3">
+          <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">סגור</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+
+<h1>{{title}}</h1>
+  <h1>{{#message}}{{/message}}</h1>
+    <div class="row">
+      <div class="col-xl-4">
+      </div>
+      <div class="col-xl-4">
+          <form class="form-signin" id="login-form" action="/" method="POST" >
+            <h2 class="form-signin-heading">כניסה</h2>
+            <label for="inputUserName" class="sr-only">User Name</label>
+            <input type="text" id="inputUserName" name="username" class="form-control mb-2" placeholder="שם משתמש"  autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="סיסמה" >
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="remember-me"> זכור אותי
+              </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">כניסה</button>
+          </form>
+      </div>
+    </div>
+<br>
