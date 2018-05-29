@@ -2,17 +2,21 @@ const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
-const flash = require('connect-flash');
+
 //database connection requirements
 const pool = require('./db');
+
 //authenticate requirements
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const flash = require('express-flash-messages');
 const pgSession = require('connect-pg-simple')(session);
 const expressValidator = require('express-validator');
+
 //express app
 const app = express();
+
 //app setting
 app.set ('views', path.join(__dirname, './views'));
 app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
@@ -22,7 +26,7 @@ app.set('port', (process.env.PORT || 3000));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use(expressValidator());
-app.use(flash());
+
 //app session use integrate with database
 app.use(session({
   secret: 'keyboard cat',
@@ -32,10 +36,17 @@ app.use(session({
   }),
   resave: false,
   saveUninitialized: false,
-  // cookie: { secure: true }
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
+//this function pass if user is authenticate and based of that desplay botton
+app.use(function(req,res,next){
+  res.locals.isAuthenticated=req.isAuthenticated();
+  next();
+});
+
 
 //local Strategy to connect application
 passport.use(new LocalStrategy(
@@ -48,26 +59,42 @@ passport.use(new LocalStrategy(
       // console.log(res5.rows.length);
        if (err5){done(err5)}
        if(res5.rows.length == 0 ){
-         return done(null,false);
+         return done(null, false,{message:'שם משתמש או סיסמה לא תקינים'});
        }
-       return done(null,{ username});
+       return done(null,{username});
     });
   }
 ));
 
-
 //login page with status on the console
 app.get('/',function (req, res,next){
-  // console.log(request.user);
-  // console.log(request.isAuthenticated());
-  res.render('login');
+  const flashMessages = res.locals.getMessages();
+  console.log(res.locals.getMessages());
+    if(flashMessages.error){
+      console.log(flashMessages.error);
+      res.render('login',{
+        showErrors:true,
+        errors: flashMessages.error
+      });
+    }
+    else{
+      res.render('login');
+    }
 });
 
 // //check if user is exist if so move to order page else redirect
 app.post('/', passport.authenticate('local', {
     successRedirect : '/orders',
-    failureRedirect : '/'
+    failureRedirect : '/',
+    badRequestMessage: 'אין ערכים בשדות',
+    failureFlash : true
 }));
+
+// // //check if user is exist if so move to order page else redirect
+// app.post('/', passport.authenticate('local', {
+//     successRedirect : '/orders',
+//     failureRedirect : '/'
+// }));
 
 //loguot from the system and delete session from cookie browser and database
 app.get('/logout',function (req, res){
