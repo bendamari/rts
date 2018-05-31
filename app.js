@@ -1,3 +1,4 @@
+tgtgtggtgtgt
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
@@ -53,7 +54,7 @@ passport.use(new LocalStrategy(
   function(username, password, done) {
     // console.log(username);
     // console.log(password);
-    var text ='SELECT * FROM test where username=$1 AND password=$2'
+    var text ='SELECT * FROM users where username=$1 AND password=$2'
     var value = [username,password]
     pool.query(text,value, (err5, res5) => {
       // console.log(res5.rows.length);
@@ -89,12 +90,6 @@ app.post('/', passport.authenticate('local', {
     badRequestMessage: 'אין ערכים בשדות',
     failureFlash : true
 }));
-
-// // //check if user is exist if so move to order page else redirect
-// app.post('/', passport.authenticate('local', {
-//     successRedirect : '/orders',
-//     failureRedirect : '/'
-// }));
 
 //loguot from the system and delete session from cookie browser and database
 app.get('/logout',function (req, res){
