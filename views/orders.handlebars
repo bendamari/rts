@@ -35,12 +35,8 @@
         <th>פריטים בהזמנה</th>
         <th>פריטים שסופקו</th>
         <th>מספר הזמנה</th>
-        <th>תאריך קליטה</th>
         <th>שם מען</th>
-        <th>עיר</th>
-        <th>רחוב</th>
-        <th>מספר רחוב</th>
-        <th>הערות</th>
+        <th>תאריך קליטה</th>
       </tr>
     </thead>
     <tbody>
@@ -51,12 +47,8 @@
           <td>{{order_num}}</td>
           <td>{{supplied}}</td>
           <td>{{order_id}}</td>
-          <td>{{order_date}}</td>
           <td>{{recipient_name}}</td>
-          <td>{{city}}</td>
-          <td>{{street}}</td>
-          <td>{{num_street}}</td>
-          <td>{{address_notes}}</td>
+          <td>{{order_date}}</td>
       {{/data}}
         </tr>
     </tbody>
@@ -74,6 +66,14 @@
       </div>
       <div class="modal-body col-xl-6">
         <form action="" method="">
+          <div class="form-group">
+            <label for="customer_name">לקוח מזמין</label>
+            <input type="name" class="form-control" id="customer_name" />
+          </div>
+          <div class="form-group">
+            <label for="customer_name">לקוח מזמין</label>
+            <input type="name" class="form-control" id="customer_name" />
+          </div>
           <div class="form-group">
             <label for="customer_name">לקוח מזמין</label>
             <input type="name" class="form-control" id="customer_name" />
