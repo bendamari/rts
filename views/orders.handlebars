@@ -1,12 +1,12 @@
 <div class="row">
-  <div class="col-xm-2 col-md-2 col-xl-2 pb-1 pl-1">
+  <div class="col-xm-2 col-md-3 pb-1 pl-1">
     <!-- Button trigger new order modal -->
     <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#newOrderModal">הזמנה חדשה</button>
   </div>
-  <div class="col-xm-2 col-md-2 col-xl-2 pb-1 pl-1">
+  <div class="col-xm-2 col-md-3 pb-1 pl-1">
     <button class="btn btn-primary btn-block" type="submit">עדכון הזמנה</button>
   </div>
-  <div class="col-xm-2 col-md-2 col-xl-2 pb-1 pl-1">
+  <div class="col-xm-2 col-md-3 pb-1 pl-1">
     <div class="dropdown">
       <button class="btn btn-success btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         סגנון תצוגה
@@ -18,7 +18,7 @@
       </div>
     </div>
   </div>
-  <div class="col-xm-2 col-md-2 col-xl-2 pl-1 pb-1">
+  <div class="col-xm-2 col-md-2 pl-1 pb-1">
     <!-- Search form -->
     <div class="md-form">
       <input class="form-control" type="text" placeholder="חיפוש" aria-label="Search">
@@ -27,14 +27,15 @@
 </div>
 <br>
 
-  <table class="table-responsive table">
+<div class="table-responsive">
+  <table class="table">
     <thead class="thead-light">
       <tr>
         <!-- <th>מספר לקוח</th> -->
+        <th>מספר הזמנה</th>
         <th>שם לקוח</th>
         <th>פריטים בהזמנה</th>
         <th>פריטים שסופקו</th>
-        <th>מספר הזמנה</th>
         <th>שם מען</th>
         <th>תאריך קליטה</th>
       </tr>
@@ -53,10 +54,10 @@
         </tr>
     </tbody>
   </table>
-
+</div>
 <!-- Modal new order -->
 <div class="modal fade" id="newOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">יצירת הזמנה חדשה</h5>
@@ -64,28 +65,141 @@
           <spanaria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body col-xl-6">
-        <form action="" method="">
-          <div class="form-group">
-            <label for="customer_name">לקוח מזמין</label>
-            <input type="name" class="form-control" id="customer_name" />
-          </div>
-          <div class="form-group">
-            <label for="customer_name">לקוח מזמין</label>
-            <input type="name" class="form-control" id="customer_name" />
-          </div>
-          <div class="form-group">
-            <label for="customer_name">לקוח מזמין</label>
-            <input type="name" class="form-control" id="customer_name" />
-          </div>
-        </form>
+      <div class="modal-body">
+        <form class="form-horizontal" action="" method="">
+          <h5>פרטי לקוח מזמין</h5>
+            <div class="container">
+                <div class="row">
+                    <div class="form-group col-xs-12 col-sm-4 pr-4">
+                        <div class="row">
+                          <label for="customer_name" class="control-label">שם לקוח</label>
+                          <input type="text" class="form-control" id="customer_name" name="customer_name">
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-4 pr-4">
+                        <div class="row">
+                          <label for="contact_name" class="control-label">שם איש קשר</label>
+                          <input type="text" class="form-control" id="contact_name" name="contact_name">
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-4 pr-4">
+                        <div class="row">
+                          <label for="contact_tel" class="control-label">טלפון איש קשר</label>
+                          <input type="text" class="form-control" id="contact_tel" name="contact_tel">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group col-xs-12 col-sm-3 pr-4">
+                        <div class="row">
+                          <label for="city" class="control-label">עיר</label>
+                          <input type="text" class="form-control" id="city" name="city">
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-3 pr-4">
+                        <div class="row">
+                          <label for="street" class="control-label">רחוב</label>
+                          <input type="text" class="form-control" id="street" name="street">
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-3 pr-4">
+                        <div class="row">
+                          <label for="house_num" class="control-label">מספר בית</label>
+                          <input type="text" class="form-control" id="house_num" name="house_num">
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-3 pr-4">
+                        <div class="row">
+                          <label for="zip" class="control-label">מיקוד</label>
+                          <input type="text" class="form-control" id="zip" name="zip">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <br />
+            <h5>פרטי נמען (כתובת)</h5>
+              <div class="container">
+                  <div class="row">
+                      <div class="form-group col-xs-12 col-sm-6 pr-4">
+                          <div class="row">
+                            <label for="recipient_name" class="control-label">שם נמען</label>
+                            <input type="text" class="form-control" id="recipient_name" name="recipient_name">
+                          </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-6 pr-4">
+                          <div class="row">
+                            <label for="recipient_tel" class="control-label">טלפון</label>
+                            <input type="text" class="form-control" id="recipient_tel" name="recipient_tel">
+                          </div>
+                      </div>
+
+                      <br />
+                      <div class="form-group col-xs-12 col-sm-3 pr-4">
+                          <div class="row">
+                            <label for="city" class="control-label">עיר</label>
+                            <input type="text" class="form-control" id="city" name="city">
+                          </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-3 pr-4">
+                          <div class="row">
+                            <label for="street" class="control-label">רחוב</label>
+                            <input type="text" class="form-control" id="street" name="street">
+                          </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-3 pr-4">
+                          <div class="row">
+                            <label for="house_num" class="control-label">מספר בית</label>
+                            <input type="text" class="form-control" id="house_num" name="house_num">
+                          </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-sm-3 pr-4">
+                          <div class="row">
+                            <label for="zip" class="control-label">מיקוד</label>
+                            <input type="text" class="form-control" id="zip" name="zip">
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+
+              <br />
+              <h5>מטענים במשלוח</h5>
+                <div class="container">
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-sm-2 pr-4">
+                            <div class="row">
+                              <input type="number" class="form-control" min="0" max="999" step="1" placeholder="משטח" />
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-2 pr-4">
+                            <div class="row">
+                              <input type="number" class="form-control" min="0" max="999" step="1" placeholder="שק" />
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-2 pr-4">
+                            <div class="row">
+                              <input type="number" class="form-control" min="0" max="999" step="1" placeholder="בית פרטי" />
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-3 pr-4">
+                            <div class="row">
+                              <input type="number" class="form-control" min="0" max="999" step="1" placeholder="סטנד" />
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-3 pr-4">
+                            <div class="row">
+                              <input type="number" class="form-control" min="0" max="999" step="1" placeholder="חריג" />
+                            </div>
+                        </div>
+                </div>
+          </form>
       </div>
       <div class="modal-footer">
         <div class="col-md-2 col-md-3 col-xl-3">
-          <button type="button" class="btn btn-primary btn-block">שלח</button>
+          <button type="submit" class="btn btn-primary btn-block">שלח</button>
         </div>
         <div class="col-md-2 col-md-3 col-xl-3">
-          <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">סגור</button>
+          <button type="reset" class="btn btn-secondary btn-block" data-dismiss="modal">סגור</button>
         </div>
       </div>
     </div>
