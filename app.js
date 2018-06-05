@@ -67,7 +67,7 @@ passport.use(new LocalStrategy(
 ));
 
 //login page with status on the console
-app.get('/',function (req, res,next){
+app.get('/',function (req, res, next){
   const flashMessages = res.locals.getMessages();
   console.log(res.locals.getMessages());
     if(flashMessages.error){
@@ -82,7 +82,15 @@ app.get('/',function (req, res,next){
     }
 });
 
-// //check if user is exist if so move to order page else redirect
+// add new order
+app.post('/add', function(req, res){
+    pool.query('INSERT INTO customers(c_name) VALUES ($1)', [req.body.customer_name], (err, res) => {
+     if (err) return console.log(err);
+     });
+    res.redirect('/orders');
+});
+
+//check if user is exist if so move to order page else redirect
 app.post('/', passport.authenticate('local', {
     successRedirect : '/orders',
     failureRedirect : '/',
@@ -96,16 +104,15 @@ app.get('/logout',function (req, res){
   req.session.destroy();
   res.redirect('/');
 });
-//connect to rders only if authenticate and have session parameter
-app.get('/orders',authenticationMiddleware(), function(request, response){
 
-  // pool.query('SELECT * FROM public.orde_list', (err, res) => {
-  //     if (err) return console.log(err);
-  //
-  //     response.render('orders', {data: res.rows, header: "דף הזמנות"});
-  // });
-    response.render('orders');
+// show orders only if authenticate and have session parameter
+app.get('/orders', authenticationMiddleware(), function(request, response){
+   pool.query('SELECT * FROM public.customers_oreders', (err, res) => {
+      if (err) return console.log(err);
+      response.render('orders', {data: res.rows, header: "דף הזמנות"});
+   });
 });
+
 //passport function must be on the end of the page
 passport.serializeUser(function(user_id, done) {
   done(null, user_id);

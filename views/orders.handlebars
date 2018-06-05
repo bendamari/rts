@@ -36,7 +36,7 @@
         <th>שם לקוח</th>
         <th>פריטים בהזמנה</th>
         <th>פריטים שסופקו</th>
-        <th>שם מען</th>
+        <th>שם נמען</th>
         <th>תאריך קליטה</th>
       </tr>
     </thead>
@@ -44,21 +44,23 @@
       {{#data}}
         <tr>
           <!-- <td>{{o_customer_id}}</td> -->
-          <td>{{customer_name}}</td>
-          <td>{{order_num}}</td>
-          <td>{{supplied}}</td>
-          <td>{{order_id}}</td>
-          <td>{{recipient_name}}</td>
+          <td>{{o_id}}</td>
+          <td>{{c_name}}</td>
+          <td>{{item_num}}</td>
+          <td></td>
+          <td>{{r_name}}</td>
           <td>{{order_date}}</td>
       {{/data}}
         </tr>
     </tbody>
   </table>
 </div>
+
 <!-- Modal new order -->
 <div class="modal fade" id="newOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
+      <form class="form-horizontal" action="/add" method="post">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">יצירת הזמנה חדשה</h5>
         <button type="button" class="close-left" data-dismiss="modal" aria-label="Close">
@@ -66,7 +68,6 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" action="" method="">
           <h5>פרטי לקוח מזמין</h5>
             <div class="container">
                 <div class="row">
@@ -192,16 +193,16 @@
                             </div>
                         </div>
                 </div>
-          </form>
       </div>
       <div class="modal-footer">
         <div class="col-md-2 col-md-3 col-xl-3">
-          <button type="submit" class="btn btn-primary btn-block">שלח</button>
+          <input type="submit" class="btn btn-primary btn-block" value="שלח" />
         </div>
         <div class="col-md-2 col-md-3 col-xl-3">
           <button type="reset" class="btn btn-secondary btn-block" data-dismiss="modal">סגור</button>
         </div>
       </div>
+    </form>
     </div>
   </div>
 </div>
