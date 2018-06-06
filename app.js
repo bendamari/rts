@@ -46,8 +46,6 @@ app.use(function(req,res,next){
   res.locals.isAuthenticated=req.isAuthenticated();
   next();
 });
-
-
 //local Strategy to connect application
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -61,7 +59,8 @@ passport.use(new LocalStrategy(
        if(res5.rows.length == 0 ){
          return done(null, false,{message:'שם משתמש או סיסמה לא תקינים'});
        }
-       return done(null,{username});
+       var profile = res5.rows[0].profile;
+       return done(null,{username,profile});
     });
   }
 ));
@@ -105,15 +104,21 @@ app.get('/logout',function (req, res){
   res.redirect('/');
 });
 
-// show orders only if authenticate and have session parameter
 app.get('/orders', authenticationMiddleware(), function(request, response){
    pool.query('SELECT * FROM public.customers_oreders', (err, res) => {
       if (err) return console.log(err);
-      response.render('orders', {data: res.rows, header: "דף הזמנות"});
+      response.render('orders', {data: res.rows,userProfile:request.user.profile, header: "דף הזמנות"});
    });
 });
 
-//passport function must be on the end of the page
+app.get('/workers', authenticationMiddleware(), function(request, response){
+   pool.query('SELECT * FROM public.workers_list', (err, res) => {
+      if (err) return console.log(err);
+      response.render('workers', {workers_list: res.rows,userProfile:request.user.profile, header: "רשימת עובדים"});
+   });
+});
+
+  //passport function must be on the end of the page
 passport.serializeUser(function(user_id, done) {
   done(null, user_id);
 });
