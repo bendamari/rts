@@ -3,6 +3,7 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 
+
 //database connection requirements
 const pool = require('./db');
 
@@ -108,14 +109,21 @@ app.get('/logout',function (req, res){
 app.get('/orders', authenticationMiddleware(), function(request, response){
    pool.query('SELECT * FROM public.customers_oreders', (err, res) => {
       if (err) return console.log(err);
-      response.render('orders', {data: res.rows,userProfile:request.user.profile, header: "דף הזמנות"});
+      response.render('orders', {data: res.rows, userProfile:request.user.profile, header: "דף הזמנות"});
    });
 });
 
 app.get('/workers', authenticationMiddleware(), function(request, response){
    pool.query('SELECT * FROM public.workers_list', (err, res) => {
       if (err) return console.log(err);
-      response.render('workers', {workers_list: res.rows,userProfile:request.user.profile, header: "רשימת עובדים"});
+      response.render('workers', {workers_list: res.rows, userProfile:request.user.profile, header: "רשימת עובדים"});
+   });
+});
+
+app.get('/rfid', authenticationMiddleware(), function(request, response){
+   pool.query('SELECT * FROM public.rfid_list', (err, res) => {
+      if (err) return console.log(err);
+      response.render('rfid', {rfid_list: res.rows, userProfile:request.user.profile, header: "רשימת תגים"});
    });
 });
 
