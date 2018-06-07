@@ -11,11 +11,20 @@
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
       <a class="navbar-brand" href="/orders">רידבי בע"מ</a>
       {{#if isAuthenticated}}
-      <a class="navbar-brand" href="/workers">עובדים</a>
-      <a class="navbar-brand" href="/logout">התנתק</a>
+      <li class="nav-item dropdown">
+        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          הגדרות
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">כללי</a>
+          <a class="dropdown-item" href="/workers">עובדים</a>
+        </div>
+      </li>
+      <a class="navbar-item float-right" href="/rfid">RFID</a>
+      <a class="navbar-item nav-link" href="/logout">התנתק</a>
       {{/if}}
     </nav>
 
