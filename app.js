@@ -69,6 +69,7 @@ passport.use(new LocalStrategy(
 app.get('/',function (req, res, next){
   const flashMessages = res.locals.getMessages();
   console.log(res.locals.getMessages());
+  //console.log(res);
     if(flashMessages.error){
       console.log(flashMessages.error);
       res.render('login',{
