@@ -6,6 +6,9 @@ const bodyParser = require('body-parser');
 //database connection requirements
 const pool = require('./db');
 
+//auto reload node app and webpage
+const reload = require('reload');
+
 //authenticate requirements
 const session = require('express-session');
 const passport = require('passport');
@@ -116,6 +119,7 @@ app.get('/workers', authenticationMiddleware(), function(request, response){
    pool.query('SELECT * FROM public.workers_list', (err, res) => {
       if (err) return console.log(err);
       response.render('workers', {workers_list: res.rows, userProfile:request.user.profile, header: "רשימת עובדים"});
+
    });
 });
 
@@ -148,4 +152,5 @@ function authenticationMiddleware () {
 	    res.redirect('/')
 	}
 };
+reload(app);
 module.exports = app;
