@@ -84,7 +84,7 @@ app.get('/',function (req, res, next){
 
 // add new order
 app.post('/add', function(req, res){
-    pool.query('INSERT INTO customers(c_name) VALUES ($1)', [req.body.customer_name], (err, res) => {
+    pool.query('INSERT INTO customers(c_name) VALUES ($1,$2,$3,$4)', [req.body.worker_name,req.body.worker_last_name,req.body.worker_tel,req.body.worker_tel], (err, res) => {
      if (err) return console.log(err);
      });
     res.redirect('/orders');
@@ -125,7 +125,14 @@ app.get('/rfid', authenticationMiddleware(), function(request, response){
       response.render('rfid', {rfid_list: res.rows, userProfile:request.user.profile, header: "רשימת תגים"});
    });
 });
-
+app.post('/add_worker', function(req, res){
+    var insert_worker ='INSERT INTO workers(w_name,w_last_name,w_phone,w_email) VALUES ($1,$2,$3,$4)'
+    var worker_values = [req.body.worker_name,req.body.worker_last_name,req.body.worker_tel,req.body.worker_mail]
+    pool.query(insert_worker,worker_values, (err, res) => {
+     if (err) return console.log(err);
+     });
+    res.redirect('/workers');
+});
   //passport function must be on the end of the page
 passport.serializeUser(function(user_id, done) {
   done(null, user_id);
