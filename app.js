@@ -3,7 +3,6 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 
-
 //database connection requirements
 const pool = require('./db');
 
