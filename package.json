@@ -31,16 +31,16 @@
     "express-session": "^1.15.6",
     "express-validator": "^5.2.0",
     "jszip": "^3.1.5",
+    "nodemon": "^1.17.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pdfmake": "^0.1.36",
     "pg": "^7.4.3",
-    "nodemon": "^1.17.5",
+    "pg-pool": "^2.0.3",
     "reload": "^2.2.1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

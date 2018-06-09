@@ -1,3 +1,4 @@
+const http = require('http');
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
@@ -25,6 +26,7 @@ app.set ('views', path.join(__dirname, './views'));
 app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
 app.set('view engine', 'handlebars');
 app.set('port', (process.env.PORT || 3000));
+
 //app using
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -49,6 +51,7 @@ app.use(function(req,res,next){
   res.locals.isAuthenticated=req.isAuthenticated();
   next();
 });
+
 //local Strategy to connect application
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -119,7 +122,6 @@ app.get('/workers', authenticationMiddleware(), function(request, response){
    pool.query('SELECT * FROM public.workers_list', (err, res) => {
       if (err) return console.log(err);
       response.render('workers', {workers_list: res.rows, userProfile:request.user.profile, header: "רשימת עובדים"});
-
    });
 });
 
@@ -129,6 +131,7 @@ app.get('/rfid', authenticationMiddleware(), function(request, response){
       response.render('rfid', {rfid_list: res.rows, userProfile:request.user.profile, header: "רשימת תגים"});
    });
 });
+
 app.post('/add_worker', function(req, res){
     var insert_worker ='INSERT INTO workers(w_name,w_last_name,w_phone,w_email) VALUES ($1,$2,$3,$4)'
     var worker_values = [req.body.worker_name,req.body.worker_last_name,req.body.worker_tel,req.body.worker_mail]
@@ -137,13 +140,16 @@ app.post('/add_worker', function(req, res){
      });
     res.redirect('/workers');
 });
-  //passport function must be on the end of the page
+
+//passport function must be on the end of the page
 passport.serializeUser(function(user_id, done) {
   done(null, user_id);
 });
+
 passport.deserializeUser(function(user_id, done) {
     done(null, user_id);
 });
+
 function authenticationMiddleware () {
 	return (req, res, next) => {
 		console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
@@ -152,5 +158,6 @@ function authenticationMiddleware () {
 	    res.redirect('/')
 	}
 };
+
 reload(app);
 module.exports = app;
