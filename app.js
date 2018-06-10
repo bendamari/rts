@@ -7,6 +7,9 @@ const bodyParser = require('body-parser');
 //database connection requirements
 const pool = require('./db');
 
+//run bash command from node.js
+var sh = require('shelljs');
+
 //auto reload node app and webpage
 const reload = require('reload');
 
@@ -94,6 +97,13 @@ app.post('/add', function(req, res){
      if (err) return console.log(err);
      });
     res.redirect('/orders');
+});
+
+// run rfid reader
+app.post('/run_rfid', function(req, res){
+    var output = sh.exec("sudo sh /git/cdm/db_test_remote.sh",{silent:true,async:false}).output;
+    console.log(output);
+    res.redirect('/rfid');
 });
 
 //check if user is exist if so move to order page else redirect

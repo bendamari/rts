@@ -3,9 +3,13 @@
     <!-- Button trigger new order modal -->
     <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#newOrderModal">הוספת תג חדש</button>
   </div>
+  <div class="col-xm-2 col-md-3 pb-1 pl-1">
+    <form method="post" action="/run_rfid">
+        <input type="submit" class="btn btn-success btn-block" value="הפעל קורא" />
+    </form>
+  </div>
 </div>
 <br>
-
 <div class="table-responsive">
   <table class="table" id="DataTable">
     <thead class="thead-light">
@@ -86,9 +90,7 @@
                         <button type="reset" class="btn btn-secondary btn-block" data-dismiss="modal">סגור</button>
                       </div>
                     </div>
-
             </div>
-
     </form>
   </div>
 </div>
