@@ -99,6 +99,14 @@ app.post('/add', function(req, res){
     res.redirect('/orders');
 });
 
+// delete all rown in rfid table
+app.post('/delete_rfid_table', function(req, res){
+    pool.query('TRUNCATE rfid; DELETE FROM rfid;', (err, res) => {
+     if (err) return console.log(err);
+     });
+    res.redirect('/rfid');
+});
+
 // run rfid reader
 app.post('/run_rfid', function(req, res){
     var output = sh.exec("sudo sh ~/cdm/db_test_remote.sh",{silent:true,async:false}).output;
