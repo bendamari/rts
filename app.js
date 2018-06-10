@@ -101,7 +101,7 @@ app.post('/add', function(req, res){
 
 // run rfid reader
 app.post('/run_rfid', function(req, res){
-    var output = sh.exec("sudo sh /git/cdm/db_test_remote.sh",{silent:true,async:false}).output;
+    var output = sh.exec("sudo sh /cdm/db_test_remote.sh",{silent:true,async:false}).output;
     console.log(output);
     res.redirect('/rfid');
 });
