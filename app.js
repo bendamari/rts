@@ -127,7 +127,7 @@ app.post('/delete_rfid_live', function(req, res){
 app.post('/run_rfid', function(req, res){
     var output = sh.exec("sudo sh ~/cdm/db_test_remote.sh",{silent:true,async:false}).output;
     console.log(output);
-    res.redirect('/rfid_list');
+    res.redirect('/rfid_live');
 });
 
 //check if user is exist if so move to order page else redirect
