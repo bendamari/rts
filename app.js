@@ -178,7 +178,8 @@ app.get('/rfid_live', authenticationMiddleware(), function(request, response){
      //console.log(res.rows.length);
      var last_epc = res.rows.length;
      if (res.rows.length > 0){
-       epc_id = res.rows[last_epc].epc_id;
+       epc_id = res.rows[last_epc-1].epc_id;
+      // console.log(res.rows[last_epc-1].epc_id)
      }
   });
    pool.query('SELECT * FROM public.rfid_live', (err, res) => {
