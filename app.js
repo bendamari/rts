@@ -180,7 +180,9 @@ app.get('/rfid_live', authenticationMiddleware(), function(request, response){
      if (res.rows.length > 0){
        epc_id = res.rows[last_epc-1].epc_id;
       // console.log(res.rows[last_epc-1].epc_id)
-     }
+    }else{
+      epc_id = 0;
+    }
   });
    pool.query('SELECT * FROM public.rfid_live', (err, res) => {
       if (err) return console.log(err);
