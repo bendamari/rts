@@ -99,24 +99,40 @@ app.post('/add', function(req, res){
     res.redirect('/orders');
 });
 
+// add new rfid tag
+app.post('/add_rfid', function(req, res){
+    pool.query('INSERT INTO rfid_live(tag_epc, tag_name, tag_time) VALUES ($1,$2,$3)', [req.body.tag_epc, req.body.tag_name,'time'], (err, res) => {
+     if (err) return console.log(err);
+     });
+    res.redirect('/rfid_live');
+});
+
 // delete all rown in rfid table
 app.post('/delete_rfid_table', function(req, res){
     pool.query('TRUNCATE rfid; DELETE FROM rfid;', (err, res) => {
      if (err) return console.log(err);
      });
-    res.redirect('/rfid');
+    res.redirect('/rfid_list');
+});
+
+// delete all rown in rfid_live table
+app.post('/delete_rfid_live', function(req, res){
+    pool.query('TRUNCATE rfid_live; DELETE FROM rfid_live;', (err, res) => {
+     if (err) return console.log(err);
+     });
+    res.redirect('/rfid_live');
 });
 
 // run rfid reader
 app.post('/run_rfid', function(req, res){
     var output = sh.exec("sudo sh ~/cdm/db_test_remote.sh",{silent:true,async:false}).output;
     console.log(output);
-    res.redirect('/rfid');
+    res.redirect('/rfid_list');
 });
 
 //check if user is exist if so move to order page else redirect
 app.post('/', passport.authenticate('local', {
-    successRedirect : '/orders',
+    successRedirect : '/rfid_list',
     failureRedirect : '/',
     badRequestMessage: 'אין ערכים בשדות',
     failureFlash : true
@@ -143,11 +159,24 @@ app.get('/workers', authenticationMiddleware(), function(request, response){
    });
 });
 
-app.get('/rfid', authenticationMiddleware(), function(request, response){
-   pool.query('SELECT * FROM public.rfid_list', (err, res) => {
+app.get('/rfid_list', authenticationMiddleware(), function(request, response){
+   pool.query('SELECT * FROM public.rfid', (err, res) => {
       if (err) return console.log(err);
-      response.render('rfid', {rfid_list: res.rows, userProfile:request.user.profile, header: "רשימת תגים"});
+      response.render('rfid_list', {rfid_list: res.rows, userProfile:request.user.profile, header: "רשימת תגים"});
    });
+});
+
+app.get('/rfid_live', authenticationMiddleware(), function(request, response){
+  var epc_id = 0;
+  pool.query('SELECT * FROM public.rfid', (err, res) => {
+     if (err) return console.log(err);
+       epc_id = res.rows[0].epc_id;
+  });
+   pool.query('SELECT * FROM public.rfid_live', (err, res) => {
+      if (err) return console.log(err);
+      response.render('rfid_live', {rfid_live: res.rows, epc_id: epc_id, userProfile:request.user.profile, header: "פריטים בנקודת ענין"});
+   });
+
 });
 
 app.post('/add_worker', function(req, res){

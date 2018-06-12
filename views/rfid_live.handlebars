@@ -1,0 +1,87 @@
+<div class="row">
+  <div class="col-xm-2 col-md-3">
+  </div>
+    <div class="col-xm-2 col-md-3">
+      <!-- Button trigger new order modal -->
+      <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#newTagModal">הוספת פריט חדש</button>
+    </div>
+    <div class="col-xm-2 col-md-3 pb-1 pl-1">
+      <form method="post" action="/delete_rfid_live">
+          <input type="submit" class="btn btn-danger btn-block" value="מחק פריטים" />
+      </form>
+    </div>
+  </div>
+<br>
+<div class="row">
+  <div class="col-xm-2 col-md-3">
+  </div>
+  <div class="col-xm-6 col-md-6">
+    <div class="table-responsive">
+      <table class="table" id="DataTable">
+        <thead class="thead-light">
+          <tr>
+            <th>מק"ט</th>
+            <th>שם</th>
+            <th>זמן</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#rfid_live}}
+            <tr>
+              <td>{{tag_epc}}</td>
+              <td>{{tag_name}}</td>
+              <td>{{tag_time}}</td>
+          {{/rfid_live}}
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal new rfid tag item -->
+<div class="modal fade" id="newTagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <form class="form-horizontal" action="/add_rfid" method="post">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">הוספת פריט חדש</h5>
+        <button type="button" class="close-left" data-dismiss="modal" aria-label="Close">
+          <spanaria-hidden="true">&times;</span>
+        </button>
+      </div><br />
+              <div class="container">
+                <div class="row">
+                  <div class="col-xm-2 col-md-12">
+                    <form method="post" action="/run_rfid">
+                        <input type="submit" class="btn btn-success btn-block" value="הפעל קורא" />
+                    </form>
+                  </div>
+                </div><br />
+                <div class="row">
+                      <div class="form-group col-xs-12 col-md-6 pr-4">
+                          <div class="row">
+                            <label for="tag_epc" class="control-label">מק"ט</label>
+                              <input type="text" class="form-control" id="tag_epc" name="tag_epc" value="{{epc_id}}">
+                          </div>
+                      </div>
+                      <div class="form-group col-xs-12 col-md-6 pr-4 pl-4">
+                          <div class="row">
+                            <label for="tag_name" class="control-label">שם פריט</label>
+                            <input type="text" class="form-control" id="tag_name" name="tag_name">
+                          </div>
+                      </div>
+                  </div>
+                    <div class="modal-footer">
+                      <div class="col-xs-6 col-md-6">
+                        <input type="submit" class="btn btn-primary btn-block" value="שלח" />
+                      </div>
+                      <div class="col-xs-6 col-md-6">
+                        <button type="reset" class="btn btn-secondary btn-block" data-dismiss="modal">סגור</button>
+                      </div>
+                    </div>
+            </div>
+    </form>
+  </div>
+</div>
+</div>
