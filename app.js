@@ -170,7 +170,10 @@ app.get('/rfid_live', authenticationMiddleware(), function(request, response){
   var epc_id = 0;
   pool.query('SELECT * FROM public.rfid', (err, res) => {
      if (err) return console.log(err);
+     //console.log(res.rows.length);
+     if (res.rows.length > 0){
        epc_id = res.rows[0].epc_id;
+     }
   });
    pool.query('SELECT * FROM public.rfid_live', (err, res) => {
       if (err) return console.log(err);
