@@ -167,7 +167,12 @@ app.get('/rfid_list', authenticationMiddleware(), function(request, response){
 });
 
 app.get('/rfid_live', authenticationMiddleware(), function(request, response){
+  //init epc_id
   var epc_id = 0;
+  //run rfid reader once
+  var output = sh.exec("sudo sh ~/cdm/db_test_remote.sh",{silent:true,async:false}).output;
+  console.log('success!');
+
   pool.query('SELECT * FROM public.rfid', (err, res) => {
      if (err) return console.log(err);
      //console.log(res.rows.length);
