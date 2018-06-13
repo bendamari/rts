@@ -125,8 +125,8 @@ app.post('/delete_rfid_live', function(req, res){
 
 // run rfid reader
 app.post('/run_rfid', function(req, res){
-    var output = sh.exec("sudo sh ~/cdm/db_test_remote.sh",{silent:true,async:false}).output;
-    console.log('success!');
+    //var output = sh.exec("sudo sh ~/cdm/db_test_remote.sh",{silent:true,async:false}).output;
+    //console.log('success!');
     res.redirect('/rfid_list');
 });
 
@@ -170,8 +170,8 @@ app.get('/rfid_live', authenticationMiddleware(), function(request, response){
   //init epc_id
   var epc_id = 0;
   //run rfid reader once
-  var output = sh.exec("sudo sh ~/cdm/db_test_remote.sh",{silent:true,async:false}).output;
-  console.log('success!');
+  //var output = sh.exec("sudo sh ~/cdm/db_test_remote.sh",{silent:true,async:false}).output;
+  //console.log('success!');
 
   // select from rfid table raw
   pool.query('SELECT * FROM public.rfid', (err, res) => {
