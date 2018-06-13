@@ -160,7 +160,7 @@ app.get('/workers', authenticationMiddleware(), function(request, response){
 });
 
 app.get('/rfid_list', authenticationMiddleware(), function(request, response){
-   pool.query('SELECT * FROM public.rfid', (err, res) => {
+   pool.query('SELECT * FROM public.live_rfid', (err, res) => {
       if (err) return console.log(err);
       response.render('rfid_list', {rfid_list: res.rows, userProfile:request.user.profile, header: "רשימת תגים"});
    });
