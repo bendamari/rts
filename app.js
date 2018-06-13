@@ -127,7 +127,7 @@ app.post('/delete_rfid_live', function(req, res){
 app.post('/run_rfid', function(req, res){
     var output = sh.exec("sudo sh ~/cdm/db_test_remote.sh",{silent:true,async:false}).output;
     console.log('success!');
-    //res.redirect('/rfid_live');
+    res.redirect('/rfid_list');
 });
 
 //check if user is exist if so move to order page else redirect
@@ -173,6 +173,7 @@ app.get('/rfid_live', authenticationMiddleware(), function(request, response){
   var output = sh.exec("sudo sh ~/cdm/db_test_remote.sh",{silent:true,async:false}).output;
   console.log('success!');
 
+  // select from rfid table raw
   pool.query('SELECT * FROM public.rfid', (err, res) => {
      if (err) return console.log(err);
      //console.log(res.rows.length);
