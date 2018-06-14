@@ -1,51 +1,37 @@
 <div class="row">
-  <div class="col-xm-2 col-md-3 pb-1 pl-1">
-    <!-- Button trigger new order modal -->
-    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#newOrderModal">הוספת תג חדש</button>
+  <div class="col-xm-2 col-md-3">
   </div>
-  <div class="col-xm-2 col-md-3 pb-1 pl-1">
+  <div class="col-xm-2 col-md-6">
     <form method="post" action="/run_rfid">
         <input type="submit" class="btn btn-success btn-block" value="הפעל קורא" />
     </form>
   </div>
-  <div class="col-xm-2 col-md-3 pb-1 pl-1">
-    <form method="post" action="/delete_rfid_table">
-        <input type="submit" class="btn btn-danger btn-block" value="מחק רשומות" />
-    </form>
+</div>
+<br />
+<div class="row">
+  <div class="col-xs-2 col-md-3">
+  </div>
+  <div class="col-xm-4 col-md-6">
+    <div class="table-responsive">
+      <table class="table" id="">
+        <thead class="thead-light">
+          <tr>
+            <th>שם</th>
+            <th>מק"ט</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#rfid_list}}
+            <tr>
+              <td>{{tag_name}}</td>
+              <td>{{epc_id}}</td>
+          {{/rfid_list}}
+            </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
-<br>
-<div class="table-responsive">
-  <table class="table" id="DataTable">
-    <thead class="thead-light">
-      <tr>
-        <!--<th>מס"ד</th>-->
-        <th>מק"ט</th>
-        <!--<th>ספירה</th>
-        <th>עוצמה</th>
-        <th>פאזה</th>-->
-        <th>זמן קריאה</th>
-        <th>מספר קורא</th>
-        <th>מספר אנטנה</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#rfid_list}}
-        <tr>
-          <!--<td>{{id}}</td>-->
-          <td>{{epc_id}}</td>
-          <!--<td>{{count}}</td>
-          <td>{{rssi}}</td>
-          <td>{{phase}}</td>-->
-          <td>{{adding_date}}</td>
-          <td>{{reader_number}}</td>
-          <td>{{antenna_id}}</td>
-      {{/rfid_list}}
-        </tr>
-    </tbody>
-  </table>
-</div>
-
 <!-- Modal new order -->
 <div class="modal fade" id="newOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">

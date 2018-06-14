@@ -101,7 +101,7 @@ app.post('/add', function(req, res){
 
 // add new rfid tag
 app.post('/add_rfid', function(req, res){
-    pool.query('INSERT INTO rfid_live(tag_epc, tag_name, tag_time) VALUES ($1,$2,$3)', [req.body.tag_epc, req.body.tag_name,'time'], (err, res) => {
+    pool.query('INSERT INTO rfid_live(tag_epc, tag_name, tag_time) VALUES ($1,$2,$3)', [req.body.tag_epc, req.body.tag_name,Date.now()], (err, res) => {
      if (err) return console.log(err);
      });
     res.redirect('/rfid_live');
@@ -153,16 +153,24 @@ app.get('/orders', authenticationMiddleware(), function(request, response){
 });
 
 app.get('/workers', authenticationMiddleware(), function(request, response){
-   pool.query('SELECT * FROM public.workers_list', (err, res) => {
+   pool.query('SELECT * FROM public.rfid_live2', (err, res) => {
       if (err) return console.log(err);
       response.render('workers', {workers_list: res.rows, userProfile:request.user.profile, header: "רשימת עובדים"});
    });
 });
 
 app.get('/rfid_list', authenticationMiddleware(), function(request, response){
-   pool.query('SELECT * FROM public.live_rfid', (err, res) => {
+
+  var tag_hist = [] ;
+  pool.query('SELECT * FROM public.rfid_live_log', (err, res) => {
+     if (err) return console.log(err);
+     //console.log(res.rows.length);
+     var tag_hist = res.rows;
+  });
+
+   pool.query('SELECT * FROM public.rfid_live2', (err, res) => {
       if (err) return console.log(err);
-      response.render('rfid_list', {rfid_list: res.rows, userProfile:request.user.profile, header: "רשימת תגים"});
+      response.render('rfid_list', {rfid_list: res.rows, tag_hist: tag_hist, userProfile:request.user.profile, header: "תצוגת RFID"});
    });
 });
 
@@ -180,16 +188,17 @@ app.get('/rfid_live', authenticationMiddleware(), function(request, response){
      var last_epc = res.rows.length;
      if (res.rows.length > 0){
        epc_id = res.rows[last_epc-1].epc_id;
-      // console.log(res.rows[last_epc-1].epc_id)
+       //console.log(res.rows[last_epc-1].epc_id)
     }else{
       epc_id = 0;
     }
   });
+  //console.log(epc_id);
    pool.query('SELECT * FROM public.rfid_live', (err, res) => {
       if (err) return console.log(err);
+      //console.log(epc_id);
       response.render('rfid_live', {rfid_live: res.rows, epc_id: epc_id, userProfile:request.user.profile, header: "פריטים בנקודת ענין"});
    });
-
 });
 
 app.post('/add_worker', function(req, res){

@@ -39,7 +39,8 @@
     "pg": "^7.4.3",
     "pg-pool": "^2.0.3",
     "reload": "^2.2.1",
-    "shelljs": "^0.8.2"
+    "shelljs": "^0.8.2",
+    "socket.io": "^0.9.19"
   },
   "keywords": [],
   "author": "",
