@@ -104,7 +104,7 @@ app.post('/add_rfid', function(req, res){
     pool.query('INSERT INTO rfid_live(tag_epc, tag_name, tag_time) VALUES ($1,$2,$3)', [req.body.tag_epc, req.body.tag_name,Date.now()], (err, res) => {
      if (err) return console.log(err);
      });
-    res.redirect('/rfid_live');
+    res.redirect('/rfid_items');
 });
 
 // delete all rown in rfid table
@@ -120,7 +120,7 @@ app.post('/delete_rfid_live', function(req, res){
     pool.query('TRUNCATE rfid_live; DELETE FROM rfid_live;', (err, res) => {
      if (err) return console.log(err);
      });
-    res.redirect('/rfid_live');
+    res.redirect('/rfid_items');
 });
 
 // run rfid reader
@@ -174,7 +174,7 @@ app.get('/rfid_list', authenticationMiddleware(), function(request, response){
    });
 });
 
-app.get('/rfid_live', authenticationMiddleware(), function(request, response){
+app.get('/rfid_items', authenticationMiddleware(), function(request, response){
   //init epc_id
   var epc_id = 0;
   //run rfid reader once
@@ -197,7 +197,7 @@ app.get('/rfid_live', authenticationMiddleware(), function(request, response){
    pool.query('SELECT * FROM public.rfid_live', (err, res) => {
       if (err) return console.log(err);
       //console.log(epc_id);
-      response.render('rfid_live', {rfid_live: res.rows, epc_id: epc_id, userProfile:request.user.profile, header: "פריטים בנקודת ענין"});
+      response.render('rfid_items', {rfid_live: res.rows, epc_id: epc_id, userProfile:request.user.profile, header: "פריטים בנקודת ענין"});
    });
 });
 
