@@ -161,16 +161,19 @@ app.get('/workers', authenticationMiddleware(), function(request, response){
 
 app.get('/rfid_list', authenticationMiddleware(), function(request, response){
 
-  var tag_hist = [] ;
-  pool.query('SELECT * FROM public.rfid_live_log', (err, res) => {
-     if (err) return console.log(err);
-     //console.log(res.rows.length);
-     var tag_hist = res.rows;
+  var tag_last = 0 ;
+  var tag_count = 0;
+  pool.query('SELECT * FROM public.last_item_read', (err1, res1) => {
+     if (err1) return console.log(err1);
+     var tag_last = res1.rows[0].epc_id;
+     console.log(tag_last);
   });
 
    pool.query('SELECT * FROM public.rfid_live2', (err, res) => {
       if (err) return console.log(err);
-      response.render('rfid_list', {rfid_list: res.rows, tag_hist: tag_hist, userProfile:request.user.profile, header: "תצוגת RFID"});
+      tag_count = res.rows.length;
+      //console.log(tag_last);
+      response.render('rfid_list', {rfid_list: res.rows, tag_count: tag_count, tag_last: tag_last, userProfile:request.user.profile, header: "תצוגת RFID"});
    });
 });
 
