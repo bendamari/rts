@@ -1,0 +1,107 @@
+<br />
+<div class="row">
+  <div class="col-xm-2 col-md-1">
+  </div>
+  <div class="col-xm-4 col-md-10">
+    <div class="table-responsive">
+      <table class="table" id="DataTable">
+        <thead class="thead-light">
+          <tr>
+            <th>שם</th>
+            <th>מק"ט</th>
+            <th>מקור</th>
+            <th>יעד</th>
+            <th>תאריך יציאה</th>
+            <th>תאריך כניסה</th>
+            <th>סטטוס</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>שק</th>
+            <th>123</th>
+            <th>מחסן</th>
+            <th>חנות</th>
+            <th>17/06/2018 07:30</th>
+            <th>18/06/2018 08:22</th>
+            <th>הושלם</th>
+          </tr>
+
+          <tr>
+            <th>סטנד</th>
+            <th>456</th>
+            <th>מחסן</th>
+            <th>חנות</th>
+            <th>17/06/2018 07:30</th>
+            <th></th>
+            <th>חסר</th>
+          </tr>
+
+          <tr>
+            <th>שק</th>
+            <th>789</th>
+            <th>מחסן</th>
+            <th>חנות</th>
+            <th>22/06/2018 07:30</th>
+            <th>18/06/2018 08:22</th>
+            <th>הושלם</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Modal new order -->
+<div class="modal fade" id="newOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <form class="form-horizontal" action="/add" method="post">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">הוסף תג חדש</h5>
+        <button type="button" class="close-left" data-dismiss="modal" aria-label="Close">
+          <spanaria-hidden="true">&times;</span>
+        </button>
+      </div>
+              <div class="container">
+                <div class="row">
+                      <div class="form-group col-xs-12 col-md-6 pr-4">
+                          <div class="row">
+                            <label for="worker_name" class="control-label">שם עובד</label>
+                            <input type="text" class="form-control" id="worker_name" name="worker_name">
+                          </div>
+                      </div>
+
+                      <div class="form-group col-xs-12 col-md-6 pr-4 pl-4">
+                          <div class="row">
+                            <label for="worker_last_name" class="control-label">שם משפחה</label>
+                            <input type="text" class="form-control" id="worker_last_name" name="worker_last_name">
+                          </div>
+                      </div>
+
+                      <div class="form-group col-xs-12 col-md-6 pr-4">
+                          <div class="row">
+                            <label for="worker_tel" class="control-label">טלפון</label>
+                            <input type="text" class="form-control" id="worker_tel" name="worker_tel">
+                          </div>
+                      </div>
+
+                      <div class="form-group col-xs-12 col-md-6 pr-4 pl-4">
+                        <div class="row">
+                        <label for="worker_mail" class="control-label">אימייל</label>
+                        <input type="text" class="form-control" id="worker_mail" name="worker_mail">
+                        </div>
+                      </div>
+                  </div>
+                    <div class="modal-footer">
+                      <div class="col-xs-6 col-md-6">
+                        <input type="submit" class="btn btn-primary btn-block" value="שלח" />
+                      </div>
+                      <div class="col-xs-6 col-md-6">
+                        <button type="reset" class="btn btn-secondary btn-block" data-dismiss="modal">סגור</button>
+                      </div>
+                    </div>
+            </div>
+    </form>
+  </div>
+</div>
+</div>
