@@ -91,7 +91,7 @@ app.get('/',function (req, res, next){
     }
 });
 
-// add new order
+// add new orde
 app.post('/add', function(req, res){
     pool.query('INSERT INTO customers(c_name) VALUES ($1,$2,$3,$4)', [req.body.worker_name,req.body.worker_last_name,req.body.worker_tel,req.body.worker_tel], (err, res) => {
      if (err) return console.log(err);
